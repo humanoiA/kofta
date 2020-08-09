@@ -1,14 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import Navigationbar from './components/Navbar/Navbar';
+import Registration from './components/Registration/Registration';
+
 function App() {
-  return (
-    <div className="App">
-      <Navigationbar />
-    </div>
-  )
+  return(<div className="App">
+    <Navigationbar />
+    <Registration />
+  </div>)
 }
 
 export default App;
