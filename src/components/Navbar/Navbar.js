@@ -2,8 +2,8 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar'
 function Navigationbar(){
     return(
-        <Navbar bg="dark" variant="dark">
-    <Navbar.Brand href="#home">
+        <Navbar bg="transparent" variant="dark">
+    <Navbar.Brand href="#" style={{color:'black'}}>
       <img
         alt=""
         src="/logo192.png"
@@ -14,7 +14,7 @@ function Navigationbar(){
       Kofta
     </Navbar.Brand>
     <div className="row col-11 d-flex justify-content-end text-white" >
-            <span className="h3">Login</span>
+            <button className="btn btn-default">Login</button>
             </div>
   </Navbar>
     )
