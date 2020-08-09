@@ -36,7 +36,3 @@
     transform: rotate(360deg);
   }
 }
-@font-face {
-  font-family: 'BalooTamma2-Regular';
-  src: local('BalooTamma2-Regular'), url(./Fonts/Baloo_Tamma_2/BalooTamma2-Regular.ttf) format('truetype');
-}
