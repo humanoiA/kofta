@@ -1,12 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
 
-import Registartion from './components/Registration/Registration';
+import SignInSide from './components/Registration/Registration';
+
 function App() {
   return (
     <div className="App">
-      <Registartion />
+      <SignInSide />
     </div>
   )
 }

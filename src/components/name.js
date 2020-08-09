@@ -24,9 +24,10 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import LockIcon from '@material-ui/icons/Lock';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { dark } from '@material-ui/core/styles/createPalette';
-import { FormControl, Input, InputLabel, InputAdornment } from "@material-ui/core";
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Visibility from '@material-ui/icons/Visibility';
+import { FormControl, Input, InputLabel } from "@material-ui/core";
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 function Copyright() {
   return (
@@ -54,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
   },
   paper: {
-    marginTop: theme.spacing(12),
     margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
@@ -74,11 +74,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(70)
   },
   form: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      marginLeft: theme.spacing(10),
-      width: '50ch',
-    },
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
   },
   dialo: {
     backgroundColor: theme.palette.grey[900],
@@ -91,7 +88,6 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    marginLeft: theme.spacing(27),
   },
 }));
 
@@ -113,18 +109,15 @@ export default function SignInSide() {
   
   const darkTheme = createMuiTheme({
     palette: {
-      type: "white",
+      type: "dark",
     },
   });
-
-  const [showPassword, setShowPassword] = React.useState(false);
-const handleClickShowPassword = () => setShowPassword(!showPassword);
-const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={12} md={7} className={classes.image} />
+      <ThemeProvider theme={darkTheme}>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -138,31 +131,23 @@ const handleMouseDownPassword = () => setShowPassword(!showPassword);
                 variant="outlined"
                 margin="normal"
                 required
-                
+                fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="off"
                 autoFocus
                 />
-               <TextField
-                label='Password'
+                <TextField
                 variant="outlined"
-                type={showPassword ? "text" : "password"} // <-- This is where the magic happens
-                //onChange={someChangeHandler}
-                InputProps={{ // <-- This is where the toggle button is added.
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
                 />
                 <Button
                 type="submit"
@@ -285,7 +270,7 @@ const handleMouseDownPassword = () => setShowPassword(!showPassword);
             </Grid>
         </div>    
         </Grid>
-        
+        </ThemeProvider>
     </Grid>    
   );
 }
