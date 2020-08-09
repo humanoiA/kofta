@@ -2,11 +2,11 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Navigationbar from './components/Navbar/Navbar';
+import Registartion from './components/Registration/Registration';
 function App() {
   return (
     <div className="App">
-      <Navigationbar />
+      <Registartion />
     </div>
   )
 }
