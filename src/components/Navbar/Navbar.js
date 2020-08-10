@@ -43,8 +43,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
   },
   paper: {
-    marginTop: theme.spacing(12),
-    margin: theme.spacing(8, 4),
+    margin: 'auto',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -63,9 +62,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(70)
   },
   form: {
+    margin: 'auto',
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      marginLeft: theme.spacing(10),
+      marginLeft: theme.spacing(8),
       width: '50ch',
     },
   },
@@ -80,10 +80,11 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    marginLeft: theme.spacing(27),
+    marginLeft: theme.spacing(30),
   },
 }));
 
+  
 function Navigationbar(){
   const classes = useStyles();
 
@@ -115,8 +116,8 @@ function Navigationbar(){
       Kofta
     </Navbar.Brand>
     <div className="row col-11 d-flex justify-content-end text-white" >
-            <button className="btn btn-default" onClick={handleClickOpen}>Login</button>
-            <Dialog open={open} fullWidth={true} onClose={handleClose} aria-labelledby="form-dialog-title" >
+            <button className="btn btn-default" onClick={() => setOpen("first")}>Login</button>
+            <Dialog open={open && open === "first"} fullWidth={true} onClose={handleClose} aria-labelledby="form-dialog-title" >
                   <IconButton className={classes.cancel} onClick={handleClose}>
             <CancelIcon />
             </IconButton>  
@@ -174,17 +175,21 @@ function Navigationbar(){
                   </Button>
               </Grid>
               <Grid item>
-                 <Button color="primary" onClick={handleClickOpen}>
+                 <Button color="primary" onClick={() => setOpen("second")}>
                   {"Don't have an account? Sign Up"}
                   </Button> 
-                  <Dialog open={open} fullWidth={true} onClose={handleClose} aria-labelledby="form-dialog-title" >
+                  </Grid>
+                </Grid>  
+                  </div> 
+      </Dialog>
+                  <Dialog open={open && open === "second"} fullWidth={true}  aria-labelledby="form-dialog-title" >
                   <IconButton className={classes.cancel} onClick={handleClose}>
             <CancelIcon />
             </IconButton> 
             <Avatar className={classes.register}>
              <PersonAddIcon />
           </Avatar> 
-        <DialogTitle id="form-dialog-title"><Typography component="h1" variant="h4">
+        <DialogTitle id="form-dialog-title"><Typography  component="h1" variant="h4">
         Employee Registration
           </Typography></DialogTitle>
           <form className={classes.formdialog} Validate>
@@ -274,10 +279,11 @@ function Navigationbar(){
                 Sign In
                 </Button>
             </form>
-      </Dialog>
-                  </Grid>
-                </Grid>  
-                  </div> 
+            <DialogActions>
+          <Button onClick={() => setOpen(null)} variant="contained">
+            Close Second Dialog
+          </Button>
+        </DialogActions>
       </Dialog>
             </div>
   </Navbar>
