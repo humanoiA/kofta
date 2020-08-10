@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   register: {
     marginBottom: theme.spacing(0),
     backgroundColor: theme.palette.secondary.main,
-    marginLeft: theme.spacing(32)
+    marginLeft: theme.spacing(35)
   },
   cancel: {
     marginTop: theme.spacing(1),
@@ -72,15 +72,23 @@ const useStyles = makeStyles((theme) => ({
   dialo: {
     backgroundColor: theme.palette.grey[900],
   },
+  typo: {
+    marginLeft: theme.spacing(15)
+  },
   formdialog: {
         '& .MuiTextField-root': {
-          margin: theme.spacing(4),
+          margin: theme.spacing(3),
           width: '25ch',
         },
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
     marginLeft: theme.spacing(30),
+  },
+  submitregs: {
+    margin: theme.spacing(3, 0, 2),
+    marginTop: theme.spacing(5),
+    marginLeft: theme.spacing(5),
   },
 }));
 
@@ -132,8 +140,7 @@ function Navigationbar(){
                 <TextField
                 variant="outlined"
                 margin="normal"
-                required
-                
+                required                
                 id="email"
                 label="Email Address"
                 name="email"
@@ -180,8 +187,9 @@ function Navigationbar(){
                   </Button> 
                   </Grid>
                 </Grid>  
-                  </div> 
+                  </div>  
       </Dialog>
+      </div>
                   <Dialog open={open && open === "second"} fullWidth={true}  aria-labelledby="form-dialog-title" >
                   <IconButton className={classes.cancel} onClick={handleClose}>
             <CancelIcon />
@@ -189,7 +197,7 @@ function Navigationbar(){
             <Avatar className={classes.register}>
              <PersonAddIcon />
           </Avatar> 
-        <DialogTitle id="form-dialog-title"><Typography  component="h1" variant="h4">
+        <DialogTitle id="form-dialog-title"><Typography className={classes.typo} component="h1" variant="h4">
         Employee Registration
           </Typography></DialogTitle>
           <form className={classes.formdialog} Validate>
@@ -274,18 +282,12 @@ function Navigationbar(){
                 
                 variant="contained"
                 color="primary"
-                className={classes.submit}
+                className={classes.submitregs}
                 >
                 Sign In
                 </Button>
             </form>
-            <DialogActions>
-          <Button onClick={() => setOpen(null)} variant="contained">
-            Close Second Dialog
-          </Button>
-        </DialogActions>
       </Dialog>
-            </div>
   </Navbar>
     )
 }
