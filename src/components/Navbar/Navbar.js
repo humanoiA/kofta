@@ -28,7 +28,7 @@ import { dark } from '@material-ui/core/styles/createPalette';
 import { FormControl, Input, InputLabel, InputAdornment } from "@material-ui/core";
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Visibility from '@material-ui/icons/Visibility';
-
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,6 +61,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginLeft: theme.spacing(70)
   },
+  back: {
+    marginTop: theme.spacing(-6),
+    marginRight: theme.spacing(70)
+  },
   form: {
     margin: 'auto',
     '& .MuiTextField-root': {
@@ -74,6 +78,9 @@ const useStyles = makeStyles((theme) => ({
   },
   typo: {
     marginLeft: theme.spacing(15)
+  },
+  forgo: {
+    marginLeft: theme.spacing(18)
   },
   formdialog: {
         '& .MuiTextField-root': {
@@ -89,6 +96,16 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
     marginTop: theme.spacing(0),
     marginLeft: theme.spacing(30),
+  },
+  submitforgo: {
+    margin: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(30),
+  },
+  submitback: {
+    margin: theme.spacing(3, 0, 2),
+    marginTop: theme.spacing(0),
+    marginLeft: theme.spacing(14),
   },
 }));
 
@@ -176,7 +193,7 @@ function Navigationbar(){
             </form>
             <Grid container>
               <Grid item xs>
-                <Button color="primary">
+                <Button color="primary" onClick={() => setOpen("third")}>
                  Forgot Password?
                   </Button>
               </Grid>
@@ -193,6 +210,9 @@ function Navigationbar(){
                   <IconButton className={classes.cancel} onClick={handleClose}>
             <CancelIcon />
             </IconButton> 
+            <IconButton className={classes.back} onClick={() => setOpen("first")}>
+            <ChevronLeftIcon />
+            </IconButton>
             <Avatar className={classes.register}>
              <PersonAddIcon />
           </Avatar> 
@@ -312,6 +332,38 @@ function Navigationbar(){
                 className={classes.submitregs}
                 >
                 Sign In
+                </Button>
+            </form>
+      </Dialog>
+      <Dialog open={open && open === "third"} fullWidth={true}  aria-labelledby="form-dialog-title" >
+                  <IconButton className={classes.cancel} onClick={handleClose}>
+            <CancelIcon />
+            </IconButton> 
+            <IconButton className={classes.back} onClick={() => setOpen("first")}>
+            <ChevronLeftIcon />
+            </IconButton>
+        <DialogTitle id="form-dialog-title"><Typography className={classes.forgo} component="h1" variant="h4">
+        Forgot Password
+          </Typography></DialogTitle>
+          <form className={classes.form} Validate>
+               <TextField
+                variant="outlined"
+                margin="normal"
+                required                
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="off"
+                autoFocus
+                />
+                <Button
+                type="submit"
+                
+                variant="contained"
+                color="primary"
+                className={classes.submitforgo}
+                >
+                Submit
                 </Button>
             </form>
       </Dialog>
