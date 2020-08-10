@@ -87,8 +87,8 @@ const useStyles = makeStyles((theme) => ({
   },
   submitregs: {
     margin: theme.spacing(3, 0, 2),
-    marginTop: theme.spacing(5),
-    marginLeft: theme.spacing(5),
+    marginTop: theme.spacing(0),
+    marginLeft: theme.spacing(30),
   },
 }));
 
@@ -109,7 +109,6 @@ function Navigationbar(){
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
-  
 
     return(
         <Navbar bg="transparent" variant="dark">
@@ -262,7 +261,21 @@ function Navigationbar(){
                 fullWidth
                 name="password"
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"} // <-- This is where the magic happens
+                //onChange={someChangeHandler}
+                InputProps={{ // <-- This is where the toggle button is added.
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
                 id="password"
                 autoComplete="off"
                 />
@@ -273,7 +286,21 @@ function Navigationbar(){
                 fullWidth
                 name="confirm password"
                 label="Confirm Password"
-                type="confirm password"
+                type={showPassword ? "text" : "password"} // <-- This is where the magic happens
+                //onChange={someChangeHandler}
+                InputProps={{ // <-- This is where the toggle button is added.
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
                 id="confirm password"
                 autoComplete="off"
                 />
