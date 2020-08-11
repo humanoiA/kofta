@@ -25,10 +25,11 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import LockIcon from '@material-ui/icons/Lock';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { dark } from '@material-ui/core/styles/createPalette';
-import { FormControl, Input, InputLabel, InputAdornment } from "@material-ui/core";
+import { FormControl, Input,  InputAdornment } from "@material-ui/core";
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Visibility from '@material-ui/icons/Visibility';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     margin: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  pape: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -73,9 +79,13 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      marginLeft: theme.spacing(8),
+      marginLeft: theme.spacing(10),
       width: '50ch',
     },
+  },
+  formregis: {
+  width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
   },
   dialo: {
     backgroundColor: theme.palette.grey[900],
@@ -98,8 +108,6 @@ const useStyles = makeStyles((theme) => ({
   },
   submitregs: {
     margin: theme.spacing(3, 0, 2),
-    marginTop: theme.spacing(0),
-    marginLeft: theme.spacing(30),
   },
   submitforgo: {
     margin: theme.spacing(2),
@@ -170,9 +178,8 @@ function Navigationbar(){
                <TextField
                 label='Password'
                 variant="outlined"
-                type={showPassword ? "text" : "password"} // <-- This is where the magic happens
-                //onChange={someChangeHandler}
-                InputProps={{ // <-- This is where the toggle button is added.
+                type={showPassword ? "text" : "password"} 
+                InputProps={{ 
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -210,88 +217,65 @@ function Navigationbar(){
                   </div>  
       </Dialog>
       </div>
-                  <Dialog open={open && open === "second"} fullWidth={true}  aria-labelledby="form-dialog-title" PaperProps={{
-    style: {
-      backgroundColor: '#424242',
-      boxShadow: 'none',
-    }}}>
+                  <Dialog open={open && open === "second"} fullWidth={true}  aria-labelledby="form-dialog-title">
                   <IconButton className={classes.cancel} onClick={handleClose}>
             <CancelIcon />
             </IconButton> 
             <IconButton className={classes.back} onClick={() => setOpen("first")}>
             <ChevronLeftIcon />
             </IconButton>
-            <Avatar className={classes.register}>
-             <PersonAddIcon />
-          </Avatar> 
-        <DialogTitle id="form-dialog-title"><Typography className={classes.typo} component="h1" variant="h4">
-        Employee Registration
-          </Typography></DialogTitle>
-          <form className={classes.formdialog} Validate>
-                <TextField
-                variant="standard"
-                margin="normal"
+          <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.pape}>
+        <Avatar className={classes.avatar}>
+          <PersonAddIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <form className={classes.formregis} noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="firstName"
+                variant="outlined"
                 required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                autoComplete="lname"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="off"
-                autoFocus
-                />
-                <TextField
-                variant="standard"
-                margin="normal"
-                required
+                autoComplete="email"
+              />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+                label='Password'
+                variant="outlined"
                 fullWidth
-                name="username"
-                label="Username"
-                type="username"
-                id="username"
-                autoComplete="off"
-                />
-                <TextField
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                name="employee Id"
-                label="Employee Id"
-                type="employee Id"
-                id="employee Id"
-                autoComplete="off"
-                />
-                <TextField
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                name="first name"
-                label="First Name"
-                type="first name"
-                id="first name"
-                autoComplete="off"
-                />
-                <TextField
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                name="last name"
-                label="Last Name"
-                type="last name"
-                id="last name"
-                autoComplete="off"
-                />
-                <TextField
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type={showPassword ? "text" : "password"} // <-- This is where the magic happens
-                //onChange={someChangeHandler}
-                InputProps={{ // <-- This is where the toggle button is added.
+                type={showPassword ? "text" : "password"} 
+                InputProps={{ 
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -304,44 +288,21 @@ function Navigationbar(){
                     </InputAdornment>
                   )
                 }}
-                id="password"
-                autoComplete="off"
                 />
-                <TextField
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                name="confirm password"
-                label="Confirm Password"
-                type={showPassword ? "text" : "password"} // <-- This is where the magic happens
-                //onChange={someChangeHandler}
-                InputProps={{ // <-- This is where the toggle button is added.
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-                id="confirm password"
-                autoComplete="off"
-                />
-                <Button
-                type="submit"
-                
-                variant="contained"
-                color="primary"
-                className={classes.submitregs}
-                >
-                Sign 
-                </Button>
-            </form>
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submitregs}
+          >
+            Sign Up
+          </Button>
+        </form>
+      </div>
+    </Container>
       </Dialog>
       <Dialog open={open && open === "third"} fullWidth={true}  aria-labelledby="form-dialog-title" PaperProps={{
     style: {
