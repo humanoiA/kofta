@@ -52,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
+  forgot: {
+    marginLeft: theme.spacing(32),
+    backgroundColor: theme.palette.secondary.main,
+  },
   register: {
     marginBottom: theme.spacing(0),
     backgroundColor: theme.palette.secondary.main,
@@ -206,7 +210,11 @@ function Navigationbar(){
                   </div>  
       </Dialog>
       </div>
-                  <Dialog open={open && open === "second"} fullWidth={true}  aria-labelledby="form-dialog-title" >
+                  <Dialog open={open && open === "second"} fullWidth={true}  aria-labelledby="form-dialog-title" PaperProps={{
+    style: {
+      backgroundColor: '#424242',
+      boxShadow: 'none',
+    }}}>
                   <IconButton className={classes.cancel} onClick={handleClose}>
             <CancelIcon />
             </IconButton> 
@@ -331,17 +339,24 @@ function Navigationbar(){
                 color="primary"
                 className={classes.submitregs}
                 >
-                Sign In
+                Sign 
                 </Button>
             </form>
       </Dialog>
-      <Dialog open={open && open === "third"} fullWidth={true}  aria-labelledby="form-dialog-title" >
+      <Dialog open={open && open === "third"} fullWidth={true}  aria-labelledby="form-dialog-title" PaperProps={{
+    style: {
+      backgroundColor: '#424242',
+      boxShadow: 'none',
+    }}}>
                   <IconButton className={classes.cancel} onClick={handleClose}>
             <CancelIcon />
             </IconButton> 
             <IconButton className={classes.back} onClick={() => setOpen("first")}>
             <ChevronLeftIcon />
             </IconButton>
+            <Avatar className={classes.forgot}>
+            <LockIcon />
+          </Avatar>
         <DialogTitle id="form-dialog-title"><Typography className={classes.forgo} component="h1" variant="h4">
         Forgot Password
           </Typography></DialogTitle>
