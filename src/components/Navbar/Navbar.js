@@ -28,7 +28,7 @@ import { dark } from '@material-ui/core/styles/createPalette';
 import { FormControl, Input, InputLabel, InputAdornment } from "@material-ui/core";
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Visibility from '@material-ui/icons/Visibility';
-
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,14 +52,22 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
+  forgot: {
+    marginLeft: theme.spacing(32),
+    backgroundColor: theme.palette.secondary.main,
+  },
   register: {
     marginBottom: theme.spacing(0),
     backgroundColor: theme.palette.secondary.main,
-    marginLeft: theme.spacing(32)
+    marginLeft: theme.spacing(35)
   },
   cancel: {
     marginTop: theme.spacing(1),
     marginLeft: theme.spacing(70)
+  },
+  back: {
+    marginTop: theme.spacing(-6),
+    marginRight: theme.spacing(70)
   },
   form: {
     margin: 'auto',
@@ -72,15 +80,36 @@ const useStyles = makeStyles((theme) => ({
   dialo: {
     backgroundColor: theme.palette.grey[900],
   },
+  typo: {
+    marginLeft: theme.spacing(15)
+  },
+  forgo: {
+    marginLeft: theme.spacing(18)
+  },
   formdialog: {
         '& .MuiTextField-root': {
-          margin: theme.spacing(4),
+          margin: theme.spacing(3),
           width: '25ch',
         },
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
     marginLeft: theme.spacing(30),
+  },
+  submitregs: {
+    margin: theme.spacing(3, 0, 2),
+    marginTop: theme.spacing(0),
+    marginLeft: theme.spacing(30),
+  },
+  submitforgo: {
+    margin: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(30),
+  },
+  submitback: {
+    margin: theme.spacing(3, 0, 2),
+    marginTop: theme.spacing(0),
+    marginLeft: theme.spacing(14),
   },
 }));
 
@@ -101,7 +130,6 @@ function Navigationbar(){
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
-  
 
     return(
         <Navbar bg="transparent" variant="dark">
@@ -132,8 +160,7 @@ function Navigationbar(){
                 <TextField
                 variant="outlined"
                 margin="normal"
-                required
-                
+                required                
                 id="email"
                 label="Email Address"
                 name="email"
@@ -170,7 +197,7 @@ function Navigationbar(){
             </form>
             <Grid container>
               <Grid item xs>
-                <Button color="primary">
+                <Button color="primary" onClick={() => setOpen("third")}>
                  Forgot Password?
                   </Button>
               </Grid>
@@ -180,16 +207,24 @@ function Navigationbar(){
                   </Button> 
                   </Grid>
                 </Grid>  
-                  </div> 
+                  </div>  
       </Dialog>
-                  <Dialog open={open && open === "second"} fullWidth={true}  aria-labelledby="form-dialog-title" >
+      </div>
+                  <Dialog open={open && open === "second"} fullWidth={true}  aria-labelledby="form-dialog-title" PaperProps={{
+    style: {
+      backgroundColor: '#424242',
+      boxShadow: 'none',
+    }}}>
                   <IconButton className={classes.cancel} onClick={handleClose}>
             <CancelIcon />
             </IconButton> 
+            <IconButton className={classes.back} onClick={() => setOpen("first")}>
+            <ChevronLeftIcon />
+            </IconButton>
             <Avatar className={classes.register}>
              <PersonAddIcon />
           </Avatar> 
-        <DialogTitle id="form-dialog-title"><Typography  component="h1" variant="h4">
+        <DialogTitle id="form-dialog-title"><Typography className={classes.typo} component="h1" variant="h4">
         Employee Registration
           </Typography></DialogTitle>
           <form className={classes.formdialog} Validate>
@@ -254,7 +289,21 @@ function Navigationbar(){
                 fullWidth
                 name="password"
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"} // <-- This is where the magic happens
+                //onChange={someChangeHandler}
+                InputProps={{ // <-- This is where the toggle button is added.
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
                 id="password"
                 autoComplete="off"
                 />
@@ -265,7 +314,21 @@ function Navigationbar(){
                 fullWidth
                 name="confirm password"
                 label="Confirm Password"
-                type="confirm password"
+                type={showPassword ? "text" : "password"} // <-- This is where the magic happens
+                //onChange={someChangeHandler}
+                InputProps={{ // <-- This is where the toggle button is added.
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
                 id="confirm password"
                 autoComplete="off"
                 />
@@ -274,18 +337,51 @@ function Navigationbar(){
                 
                 variant="contained"
                 color="primary"
-                className={classes.submit}
+                className={classes.submitregs}
                 >
-                Sign In
+                Sign 
                 </Button>
             </form>
-            <DialogActions>
-          <Button onClick={() => setOpen(null)} variant="contained">
-            Close Second Dialog
-          </Button>
-        </DialogActions>
       </Dialog>
-            </div>
+      <Dialog open={open && open === "third"} fullWidth={true}  aria-labelledby="form-dialog-title" PaperProps={{
+    style: {
+      backgroundColor: '#424242',
+      boxShadow: 'none',
+    }}}>
+                  <IconButton className={classes.cancel} onClick={handleClose}>
+            <CancelIcon />
+            </IconButton> 
+            <IconButton className={classes.back} onClick={() => setOpen("first")}>
+            <ChevronLeftIcon />
+            </IconButton>
+            <Avatar className={classes.forgot}>
+            <LockIcon />
+          </Avatar>
+        <DialogTitle id="form-dialog-title"><Typography className={classes.forgo} component="h1" variant="h4">
+        Forgot Password
+          </Typography></DialogTitle>
+          <form className={classes.form} Validate>
+               <TextField
+                variant="outlined"
+                margin="normal"
+                required                
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="off"
+                autoFocus
+                />
+                <Button
+                type="submit"
+                
+                variant="contained"
+                color="primary"
+                className={classes.submitforgo}
+                >
+                Submit
+                </Button>
+            </form>
+      </Dialog>
   </Navbar>
     )
 }
