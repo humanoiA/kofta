@@ -7,6 +7,7 @@ import Banner from './components/Banner/Banner';
 import Registration from './components/Registration/Registration';
 import Work from './components/Work/Work';
 import ParticlesBg from 'particles-bg'
+import Dashboard from './components/Dashboard/Dashboard';
 function App() {
   return(<div className="App">
     <Navigationbar />
